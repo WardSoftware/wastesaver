@@ -15,9 +15,6 @@ export default function MyFridgeScreen({ navigation }: RootTabScreenProps<'MyFri
   const [showOff, setShowOff] = useState(false);
 
   useEffect(() => {
-    let isMounted = true
-
-    if (isMounted) {
       setTimeout(() => {
         if (current == 3) {
             setShowOff(true);
@@ -25,11 +22,6 @@ export default function MyFridgeScreen({ navigation }: RootTabScreenProps<'MyFri
             clearTimeout()
             setCurrent(current + 1)
       }, 2000);
-    }
-
-    return () => {
-      isMounted = false;
-    }
   }, [current])
   
   
