@@ -16,10 +16,14 @@ export default function ListItem(props: any) {
             <View style={{flexDirection: 'row', flex: 1, alignContent: 'center', alignItems: 'center'}}>
                 <FontAwesome style={{
                     fontSize: 35,
+                    height: 40,
+                    width: 40,
                     textAlign: 'center'
+                    
                 }}
                     name={props.name}
                 />
+
                 <Text style={{padding: 15}}>{props.text}</Text>
             </View>
         </TouchableOpacity>
