@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 import { Text, View } from '../components/Themed';
@@ -14,13 +14,16 @@ export default function MyFridgeScreen({ navigation }: RootTabScreenProps<'MyFri
   const [current, setCurrent] = useState(0);
   const [showOff, setShowOff] = useState(false);
 
-  setTimeout(() => {
+  useEffect(() => {
+    setTimeout(() => {
       if (current == 3) {
           setShowOff(true);
       } 
           clearTimeout()
           setCurrent(current + 1)
-  }, 2000);
+    }, 2000);
+  }, [current])
+  
   
   return (
     <View style={styles.container}>
