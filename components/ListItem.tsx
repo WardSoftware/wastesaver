@@ -1,12 +1,26 @@
 import React from 'react';
 import { Text, View } from './Themed';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ListItem(props: any) {
     return (
-        <TouchableOpacity style={styles.viewStyle} onPress={props.onPress}>
-            <View>
-                <Text style={styles.textStyle}>{props.text}</Text>
+        <TouchableOpacity onPress={props.onPress} style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#bbbbbb",
+            // backgroundColor: 'red',
+            height: 80,
+            justifyContent: 'center',
+            paddingLeft: 15
+        }}>
+            <View style={{flexDirection: 'row', flex: 1, alignContent: 'center', alignItems: 'center'}}>
+                <FontAwesome style={{
+                    fontSize: 35,
+                    textAlign: 'center'
+                }}
+                    name={props.name}
+                />
+                <Text style={{padding: 15}}>{props.text}</Text>
             </View>
         </TouchableOpacity>
     ); 

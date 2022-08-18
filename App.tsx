@@ -1,6 +1,7 @@
 import { setStatusBarNetworkActivityIndicatorVisible, StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React from 'react'
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
@@ -9,21 +10,14 @@ import LogonScreen from './screens/Identification/LogonScreen'
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-  const [loggedIn, setLogin] = useState(false)
-  const login = () => {
-    setLogin(true)
-  }
+  const colorScheme = useColorScheme();  
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        { loggedIn ? 
-          <Navigation colorScheme={colorScheme} /> : 
-          <LogonScreen login={login} /> 
-        }
+          <Navigation colorScheme={colorScheme} />
         <StatusBar />
       </SafeAreaProvider>
     );

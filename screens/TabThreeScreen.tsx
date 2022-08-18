@@ -3,20 +3,18 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import { RootTabScreenProps } from '../types';
 import { Text, View } from '../components/Themed';
-import EditScreenInfo from '../components/EditScreenInfo';
 import ListItem from '../components/ListItem';
-
 
 
 export default function TabThreeScreen({ navigation }: RootTabScreenProps<'TabThree'>) {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Text style={styles.title}>Settings</Text>
-                <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-                <ListItem onPress={() => console.log("Profile")} text="Profile" />
-                <ListItem onPress={() => console.log("Billing")} text="Billing" />
-                <ListItem onPress={() => console.log("Log Out")} text="Log Out"/>
+                <ListItem onPress={() => console.log("Profile")} text="Profile" name="user" />
+                <ListItem onPress={() => console.log("Billing")} text="Billing" name="money" />
+                <ListItem onPress={() => console.log("Data")} text="Data" name="file-text" />
+                <ListItem onPress={() => console.log("Privacy")} text="Privacy" name="lock" />
+                <ListItem onPress={() => navigation.navigate('Logon')} text="Log Out" name="arrow-circle-right" />
             </View>
         </ScrollView>
     );
@@ -25,8 +23,6 @@ export default function TabThreeScreen({ navigation }: RootTabScreenProps<'TabTh
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     title: {
       fontSize: 20,

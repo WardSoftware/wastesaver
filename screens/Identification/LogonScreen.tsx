@@ -3,19 +3,19 @@
 // If register, go to register
 // Avoid using navigation until logged in (easier that way)
 
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, TextInput, ScrollView, KeyboardAvoidingView, Button, ActivityIndicator } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, TextInput, ScrollView, Button, ActivityIndicator } from 'react-native'
 import api from '../../config';
 import Navigation from '../../navigation';
-export default function LogonScreen(props) {
+import { RootStackScreenProps } from '../../types';
+
+export default function LogonScreen( {navigation}: RootStackScreenProps<'Logon'> ) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [success, setSuccess] = useState(false);
     const [failed, setFailed] = useState(false);
     const [disabled, setDisabled] = useState(false);
-   
     
     return !success ? (
         <ScrollView keyboardDismissMode='interactive' 
@@ -61,14 +61,10 @@ export default function LogonScreen(props) {
                     }).then(r => r.json())
                     .then(json => {
                         if (json.response == "Success") {
-                            setSuccess(true)
-                            setFailed(false)
-                            setDisabled(true)
-                            props.login()
-
+                            navigation.navigate('Root')
+                            
                             // Go to Navigation and kill this screen
                         } else {
-                            setSuccess(false)
                             setFailed(true)
                         }
                     })
@@ -91,8 +87,7 @@ export default function LogonScreen(props) {
                             setSuccess(true)
                             setFailed(false)
                             setDisabled(true)
-                            State().setState({loggedIn: true})
-
+                            navigation.navigate("Root")
 
                             // Go to Navigation and kill this screen
 
@@ -119,7 +114,6 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignSelf: 'center',
-        
         paddingTop: 100,
         paddingBottom: 150,
         fontWeight: '200',
@@ -128,8 +122,6 @@ const styles = StyleSheet.create({
     header: {
         alignSelf: 'center',
         margin: 25,
-
-        
     },
     input: {
         alignSelf: 'center',
