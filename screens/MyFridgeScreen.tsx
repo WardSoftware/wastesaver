@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -15,13 +15,21 @@ export default function MyFridgeScreen({ navigation }: RootTabScreenProps<'MyFri
   const [showOff, setShowOff] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (current == 3) {
-          setShowOff(true);
-      } 
-          clearTimeout()
-          setCurrent(current + 1)
-    }, 2000);
+    let isMounted = true
+
+    if (isMounted) {
+      setTimeout(() => {
+        if (current == 3) {
+            setShowOff(true);
+        } 
+            clearTimeout()
+            setCurrent(current + 1)
+      }, 2000);
+    }
+
+    return () => {
+      isMounted = false;
+    }
   }, [current])
   
   
@@ -31,6 +39,7 @@ export default function MyFridgeScreen({ navigation }: RootTabScreenProps<'MyFri
         <WhatsGoingOffModal /> :      
         <View>
           <Text style={styles.greeting}>{greeting[current]}</Text>
+          { current == 3 ? <ActivityIndicator /> : null }
         </View>
       }
     </View>
